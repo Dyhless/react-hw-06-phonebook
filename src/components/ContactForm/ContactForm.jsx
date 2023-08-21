@@ -1,7 +1,10 @@
 import React, { useCallback, useState } from 'react';
 import { Form, Label, Input, Button } from './ContactForm.styled';
+import { useDispatch } from 'react-redux';
+import { addContact } from 'redux/contactsSlice';
 
-export const ContactForm = ({ onSubmit }) => {
+export const ContactForm = () => {
+  const dispatch = useDispatch();
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
@@ -17,11 +20,11 @@ export const ContactForm = ({ onSubmit }) => {
   const handleSubmit = useCallback(
     event => {
       event.preventDefault();
-      onSubmit(name, number);
+      dispatch(addContact({ name, number }));
       setName('');
       setNumber('');
     },
-    [onSubmit, name, number]
+    [dispatch, name, number]
   );
 
   return (
