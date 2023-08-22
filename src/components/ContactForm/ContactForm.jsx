@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { useCallback, useState } from 'react';
-import { Form, Label, Input, Button } from './ContactForm.styled';
+import { Button, Input, Label, Form } from './ContactForm.styled';
 import { useDispatch, useSelector } from 'react-redux';
 import { getContacts } from 'redux/selectors';
 import { addContact } from 'redux/contactsSlice';
@@ -67,7 +67,6 @@ export const ContactForm = () => {
           required
         />
       </Label>
-
       <Button type="submit">Add contact</Button>
     </Form>
   );
