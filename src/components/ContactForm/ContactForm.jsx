@@ -1,10 +1,13 @@
+import PropTypes from 'prop-types';
 import React, { useCallback, useState } from 'react';
 import { Form, Label, Input, Button } from './ContactForm.styled';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { getContacts } from 'redux/selectors';
 import { addContact } from 'redux/contactsSlice';
 
 export const ContactForm = () => {
   const dispatch = useDispatch();
+  const contacts = useSelector(getContacts);
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
@@ -20,11 +23,21 @@ export const ContactForm = () => {
   const handleSubmit = useCallback(
     event => {
       event.preventDefault();
+
+      const existingContact = contacts.find(
+        contact => contact.name === name || contact.number === number
+      );
+
+      if (existingContact) {
+        alert('Contact with the same name or number already exists!');
+        return;
+      }
+
       dispatch(addContact({ name, number }));
       setName('');
       setNumber('');
     },
-    [dispatch, name, number]
+    [dispatch, name, number, contacts]
   );
 
   return (
@@ -58,4 +71,8 @@ export const ContactForm = () => {
       <Button type="submit">Add contact</Button>
     </Form>
   );
+};
+
+ContactForm.propTypes = {
+  onSubmit: PropTypes.func,
 };

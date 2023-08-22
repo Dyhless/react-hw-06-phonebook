@@ -1,4 +1,3 @@
-import React from 'react';
 import { Item, Info, Name, Number, DeleteButton } from './ContactItem.styled';
 
 const ContactItem = ({ name, number, onDelete }) => (
