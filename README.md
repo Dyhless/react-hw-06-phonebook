@@ -1,4 +1,4 @@
-## Redux Basics. Redux toolkit and React library-Redux hooks
+## Redux Basics. Redux toolkit and React library-Redux hooks.
 
 ### Task - Admission criteria
 
